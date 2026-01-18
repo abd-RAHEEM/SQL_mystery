@@ -35,7 +35,7 @@ const questions = [
     },
     {
         id: 4,
-        text: "What is stored at location id 3?",
+        text: "What is at location id 3?",
         answers: ["StorageRoom"],
         hint: "SELECT place FROM locations WHERE id = 3"
     },
