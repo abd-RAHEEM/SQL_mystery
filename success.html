@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfect Investigation! – MysteryQuery</title>
+    <meta name="description" content="Congratulations on solving the mystery!">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="success-page">
+    <!-- Celebration Screen -->
+    <div class="page-container celebration">
+        <div class="confetti-container" id="confetti-container"></div>
+        <div class="celebration-content">
+            <div class="trophy-icon">🏆</div>
+            <h1>Perfect Investigation!</h1>
+            <p class="celebration-message">
+                You solved the mystery in one try without a single mistake!
+            </p>
+            <div class="final-score">
+                <span class="label">Final Score:</span>
+                <span class="value" id="final-score">0</span>
+            </div>
+            <p class="detective-message">
+                Excellent detective work, <strong id="final-detective-name">Detective</strong>!
+            </p>
+            <button id="play-again-btn" class="btn-primary">
+                Investigate Another Case
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Success page logic
+        document.addEventListener('DOMContentLoaded', function () {
+            // Redirect if accessed without completing the game
+            const finalScore = sessionStorage.getItem('finalScore');
+            const playerName = sessionStorage.getItem('playerName');
+
+            if (!finalScore || !playerName) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Display final results
+            document.getElementById('final-score').textContent = finalScore;
+            document.getElementById('final-detective-name').textContent = playerName;
+
+            // Create confetti animation
+            createConfetti();
+
+            // Play again button
+            document.getElementById('play-again-btn').addEventListener('click', function () {
+                // Clear session data
+                sessionStorage.clear();
+                // Go back to login page
+                window.location.href = 'index.html';
+            });
+        });
+
+        function createConfetti() {
+            const container = document.getElementById('confetti-container');
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24', '#6c5ce7', '#a29bfe'];
+
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = Math.random() * 3 + 's';
+                confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                container.appendChild(confetti);
+            }
+        }
+    </script>
+</body>
+
+</html>

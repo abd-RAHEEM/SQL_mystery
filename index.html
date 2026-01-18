@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MysteryQuery – Learn SQL Through Investigation</title>
+    <meta name="description"
+        content="Solve the mystery of the missing trophy using SQL SELECT queries. A detective-themed learning experience for SQL beginners.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Login Page -->
+    <div class="page-container">
+        <div class="detective-bg"></div>
+        <div class="landing-content">
+            <div class="mystery-card">
+                <div class="card-header">
+                    <div class="magnifying-glass">🔍</div>
+                    <h1>MysteryQuery</h1>
+                    <p class="tagline">Learn SQL Through Investigation</p>
+                </div>
+                <div class="card-body">
+                    <h2>The Mystery Awaits</h2>
+                    <p>A trophy has gone missing. Only you can solve this case using SQL queries.</p>
+                    <form id="name-form">
+                        <label for="player-name">Enter Your Detective Name</label>
+                        <input type="text" id="player-name" placeholder="Detective..." required autocomplete="off"
+                            maxlength="30">
+                        <button type="submit" class="btn-primary">
+                            Begin Investigation
+                            <span class="arrow">→</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Login page logic
+        document.getElementById('name-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const playerName = document.getElementById('player-name').value.trim();
+
+            if (playerName) {
+                // Store player name in sessionStorage
+                sessionStorage.setItem('playerName', playerName);
+                // Navigate to game page
+                window.location.href = 'game.html';
+            }
+        });
+    </script>
+</body>
+
+</html>

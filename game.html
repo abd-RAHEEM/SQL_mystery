@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investigation – MysteryQuery</title>
+    <meta name="description" content="Investigate the missing trophy case using SQL queries">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- SQL.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="game-page">
+    <!-- Score Card (Top Right) -->
+    <div id="score-card" class="score-card">
+        <div class="badge">🎖️</div>
+        <div class="score-info">
+            <div class="detective-name" id="detective-name">Detective</div>
+            <div class="score-display">
+                <span class="score-label">Score:</span>
+                <span class="score-value" id="score-value">0</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hint Button -->
+    <button id="hint-btn" class="hint-btn" title="Show SQL Hints">
+        💡 Hints
+    </button>
+
+    <!-- Main Container -->
+    <div class="game-container">
+        <!-- Top Section: Story -->
+        <section class="story-section">
+            <div class="section-header">
+                <h2>📜 Case File: The Missing Trophy</h2>
+            </div>
+            <div class="story-content">
+                <div class="case-brief">
+                    <p class="intro">
+                        <strong>Date:</strong> Last Night<br>
+                        <strong>Location:</strong> Riverside High School<br>
+                        <strong>Incident:</strong> Trophy Theft
+                    </p>
+                    <p>
+                        The school's prestigious annual fest trophy has vanished without a trace.
+                        The last time anyone saw it was on the <strong>Stage</strong> during the closing ceremony.
+                    </p>
+                    <p>
+                        Several people were present in the school that evening. Your mission is to analyze
+                        the database of movements, locations, and clues to identify the culprit.
+                    </p>
+                    <p class="warning">
+                        ⚠️ <strong>Remember:</strong> Only volunteers had access to the Storage Room.
+                        The theft occurred sometime after 18:05. Use your SQL skills to uncover the truth.
+                    </p>
+                    <p class="answer-rule">
+                        📝 <strong>Answer Format:</strong> All answers must be exactly ONE WORD (no spaces allowed).
+                    </p>
+                </div>
+
+                <div class="evidence-summary">
+                    <h3>📊 Database Tables Available:</h3>
+                    <ul>
+                        <li><code>people</code> – List of all individuals present</li>
+                        <li><code>locations</code> – All areas in the school</li>
+                        <li><code>movements</code> – Who went where and when</li>
+                        <li><code>clues</code> – Important evidence collected</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Section: Questions and SQL Editor -->
+        <div class="investigation-area">
+            <!-- Questions Panel -->
+            <section class="questions-section">
+                <div class="section-header">
+                    <h2>🔎 Investigation Questions</h2>
+                </div>
+                <div class="questions-list" id="questions-list">
+                    <!-- Questions will be dynamically generated -->
+                </div>
+            </section>
+
+            <!-- SQL Editor Panel -->
+            <section class="sql-section">
+                <div class="section-header">
+                    <h2>💻 SQL Investigation Terminal</h2>
+                </div>
+                <div class="sql-editor">
+                    <div class="editor-controls">
+                        <button id="execute-btn" class="btn-execute">
+                            ▶ Execute Query
+                        </button>
+                        <button id="clear-btn" class="btn-clear">
+                            🗑️ Clear
+                        </button>
+                    </div>
+                    <textarea id="sql-input"
+                        placeholder="-- Type your SELECT query here&#10;-- Example: SELECT * FROM people;"
+                        spellcheck="false"></textarea>
+                    <div id="sql-output" class="sql-output">
+                        <div class="output-placeholder">Query results will appear here...</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Hint Modal -->
+    <div id="hint-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>💡 SQL Command Reference</h2>
+                <button class="modal-close" id="close-hint-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="hint-section">
+                    <h3>SELECT</h3>
+                    <p>Retrieve data from a table</p>
+                    <code>SELECT column1, column2 FROM table_name;</code>
+                    <code>SELECT * FROM people;</code>
+                </div>
+                <div class="hint-section">
+                    <h3>WHERE</h3>
+                    <p>Filter rows based on conditions</p>
+                    <code>SELECT * FROM people WHERE role = 'student';</code>
+                </div>
+                <div class="hint-section">
+                    <h3>AND / OR</h3>
+                    <p>Combine multiple conditions</p>
+                    <code>SELECT * FROM movements WHERE person_id = 1 AND time > '18:00';</code>
+                </div>
+                <div class="hint-section">
+                    <h3>JOIN</h3>
+                    <p>Combine data from multiple tables</p>
+                    <code>SELECT people.name, locations.place FROM movements<br>
+                    JOIN people ON movements.person_id = people.id<br>
+                    JOIN locations ON movements.place_id = locations.id;</code>
+                </div>
+                <div class="hint-section">
+                    <h3>ORDER BY</h3>
+                    <p>Sort results</p>
+                    <code>SELECT * FROM movements ORDER BY time;</code>
+                </div>
+                <div class="hint-section">
+                    <h3>LIMIT</h3>
+                    <p>Limit number of results</p>
+                    <code>SELECT * FROM people LIMIT 5;</code>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+
+</html>
