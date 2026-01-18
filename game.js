@@ -29,7 +29,7 @@ const questions = [
     },
     {
         id: 3,
-        text: "Who was at the Stage?",
+        text: "Who was at the Stage during theft?",
         answers: ["Aisha"],
         hint: "Join movements and locations, filter by place = 'Stage'"
     },
