@@ -450,6 +450,15 @@ code {
     margin-top: var(--spacing-lg);
 }
 
+.perfect-score-notice {
+    background: linear-gradient(135deg, rgba(217, 119, 6, 0.15) 0%, rgba(245, 158, 11, 0.15) 100%);
+    padding: var(--spacing-lg);
+    border-left: 4px solid #f59e0b;
+    border-radius: var(--radius-md);
+    margin-top: var(--spacing-lg);
+    box-shadow: 0 2px 8px rgba(217, 119, 6, 0.1);
+}
+
 .evidence-summary {
     background: var(--color-bg-primary);
     padding: var(--spacing-lg);
